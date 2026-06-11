@@ -26,12 +26,17 @@
             --bg-lendario: rgba(255, 190, 11, 0.25);
         }
 
+        /* BLINDAGEM COMPLETA ESTILO APP - ACABA COM SELEÇÕES ACIDENTAIS */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         body {
@@ -119,18 +124,30 @@
             align-items: center;
         }
 
-        header {
-            text-align: center;
-            margin: 10px 0 20px 0;
+        .carteira-fragmentos {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #00f5d4;
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.15);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 15px;
         }
 
-        #progresso-total {
+        .progresso-album-container {
             color: #b5179e;
             font-weight: bold;
             font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-align: center;
         }
 
-        /* NAVEGAÇÃO POR ABAS */
+        /* ABAS */
         .abas-navegacao {
             display: flex;
             gap: 10px;
@@ -159,7 +176,6 @@
             box-shadow: 0 0 15px rgba(181, 23, 158, 0.4);
         }
 
-        /* CONTÊINERES DAS ABAS */
         .secao-aba {
             display: none;
             width: 100%;
@@ -184,7 +200,7 @@
             text-align: center;
             width: 100%;
             max-width: 600px;
-            margin: 0 auto 30px auto;
+            margin: 0 auto;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
@@ -271,14 +287,25 @@
             border: 1px solid #444455;
         }
 
-        .reciclagem-box {
+        .container-loja-atividades {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
             margin-top: 15px;
+        }
+
+        .reciclagem-box {
+            flex: 1;
+            min-width: 240px;
             padding: 15px;
             background: rgba(0,0,0,0.2);
             border-radius: 16px;
             border: 1px dashed rgba(255,255,255,0.1);
-            display: inline-block;
-            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-reciclar {
@@ -296,6 +323,38 @@
         .btn-reciclar:hover:not(:disabled) { transform: scale(1.05); }
         .btn-reciclar:disabled { background: #444; color: #777; box-shadow: none; cursor: not-allowed; }
 
+        .secret-card-display {
+            width: 85px;
+            height: 113px;
+            background: linear-gradient(135deg, #2b1055, #511281);
+            border: 2px dashed var(--lendario);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.25);
+            text-shadow: 0 0 10px rgba(255, 190, 11, 0.3);
+            margin-bottom: 5px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .btn-comprar-secreto {
+            background: linear-gradient(90deg, #ff9e00, #ff6000);
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 158, 0, 0.3);
+            transition: transform 0.2s ease;
+            margin-top: 8px;
+            font-size: 0.85rem;
+        }
+        .btn-comprar-secreto:hover:not(:disabled) { transform: scale(1.05); }
+        .btn-comprar-secreto:disabled { background: #444; color: #777; box-shadow: none; cursor: not-allowed; }
+
         .timer {
             margin-top: 10px;
             font-size: 0.9rem;
@@ -303,24 +362,69 @@
             font-weight: bold;
         }
 
+        /* CONTAINER DO INVENTÁRIO */
+        .secao-inventario-separador {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            margin: 25px auto 0 auto;
+            text-align: center;
+            scroll-margin-top: 20px;
+        }
+        .secao-inventario-separador.active {
+            display: block;
+        }
+        .linha-divisoria-neon {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            width: 100%;
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+        
+        .header-inventario-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 580px;
+            margin: 0 auto 15px auto;
+            padding: 0 10px;
+        }
+
+        .titulo-inventario {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffb7ff;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-colar-tudo {
+            background: linear-gradient(135deg, #00f5d4, #00bbf9);
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 245, 212, 0.3);
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform;
+        }
+        .btn-colar-tudo:hover {
+            transform: scale(1.05);
+        }
+
         .pack-opening {
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin-top: 0px;
             flex-wrap: wrap;
-            height: 0px;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 0.35s ease-in-out;
-        }
-
-        .pack-opening.active {
-            margin-top: 20px;
-            height: auto;
-            min-height: 120px;
-            opacity: 1;
-            overflow: visible;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
         }
 
         .sticker-item {
@@ -338,7 +442,7 @@
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
             user-select: none;
             -webkit-user-drag: none;
-            touch-action: none;
+            touch-action: pan-y; 
         }
 
         .sticker-item.clicked-out {
@@ -351,7 +455,6 @@
             100% { transform: scale(0) rotate(-15deg); opacity: 0; filter: brightness(2); }
         }
 
-        /* ETIQUETA DO NÚMERO EXATAMENTE EM CIMA DA FIGURINHA */
         .badge-numero {
             position: absolute;
             top: 4px;
@@ -384,7 +487,7 @@
         @keyframes spawnLendariaAnim { 0% { transform: scale(0) rotateY(180deg); filter: brightness(2); } 100% { transform: scale(1.08) rotateY(0deg); filter: brightness(1); } }
         @keyframes pulseLendario { 0% { box-shadow: 0 5px 15px rgba(0,0,0,0.6); } 100% { box-shadow: 0 0 25px var(--lendario), 0 0 5px #fff; } }
 
-        /* GRID DO ÁLBUM CONFIGURADO COMO BLOCO 3X3 COMFY */
+        /* GRID DO ÁLBUM (3X3 BLOCO) */
         .album-wrapper {
             width: 100%;
             background: var(--card-dark);
@@ -563,6 +666,7 @@
             cursor: pointer;
         }
 
+        /* FILA DE TOASTS CUSTOMIZADOS - ANIMAÇÃO FLUIDA */
         .toast-fragmento {
             position: fixed;
             bottom: 30px;
@@ -573,13 +677,39 @@
             border-radius: 30px;
             box-shadow: 0 5px 20px rgba(0, 245, 212, 0.4);
             z-index: 2000;
-            animation: slideUpToast 2s ease forwards;
+            animation: slideUpToast 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
+
+        /* TOAST ESPECIAL DE SUCESSO/COMPLETO */
+        .toast-premium-app {
+            position: fixed;
+            top: 25%;
+            background: linear-gradient(135deg, #1e0034, var(--primary));
+            color: #fff;
+            font-weight: bold;
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 10px 40px rgba(114, 9, 183, 0.6);
+            text-align: center;
+            z-index: 3000;
+            max-width: 320px;
+            width: 90%;
+            animation: popInToastApp 4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
         @keyframes slideUpToast {
-            0% { transform: translateY(50px); opacity: 0; }
+            0% { transform: translateY(60px); opacity: 0; }
             15% { transform: translateY(0); opacity: 1; }
             85% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-30px); opacity: 0; }
+            100% { transform: translateY(-40px); opacity: 0; }
+        }
+
+        @keyframes popInToastApp {
+            0% { transform: scale(0.6); opacity: 0; }
+            10% { transform: scale(1); opacity: 1; }
+            90% { transform: scale(1); opacity: 1; filter: brightness(1); }
+            100% { transform: scale(0.4) translateY(-100px); opacity: 0; }
         }
     </style>
 </head>
@@ -599,7 +729,7 @@
     <!-- CONTEÚDO PRINCIPAL -->
     <div id="conteudo-principal">
         <header>
-            <p id="progresso-total">Carregando photocards...</p>
+            <div id="carteira-loja" class="carteira-fragmentos">💎 0 Fragmentos</div>
         </header>
 
         <div class="abas-navegacao">
@@ -623,17 +753,34 @@
                 <button id="btn-abrir" class="btn-pacote" onclick="engatilharAbertura()">Abrir Pacotinho 🛍️</button>
                 <div id="timer" class="timer"></div>
                 
-                <div class="reciclagem-box">
-                    <div style="font-size: 0.85rem; font-weight: bold;" id="info-repetidas">Fragmentos Obtidos: 0 / 3</div>
-                    <button id="btn-reciclar" class="btn-reciclar" onclick="executarForja()" disabled>Abrir Pacotinho Extra 🔮</button>
-                </div>
+                <div class="container-loja-atividades">
+                    <div class="reciclagem-box">
+                        <div style="font-size: 0.85rem; font-weight: bold; color: #aaa;">Forjar Giro Extra</div>
+                        <button id="btn-reciclar" class="btn-reciclar" onclick="executarForja()">Consumir 3 💎</button>
+                    </div>
 
+                    <div class="reciclagem-box">
+                        <div class="secret-card-display">?</div>
+                        <button id="btn-comprar-secreto" class="btn-comprar-secreto" onclick="comprarCardSecretoFaltante()">Card Faltante (5 💎)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO DO INVENTÁRIO -->
+            <div id="bloco-inventario-separado" class="secao-inventario-separador">
+                <div class="linha-divisoria-neon"></div>
+                <div class="header-inventario-flex">
+                    <div class="titulo-inventario">Photocards Ganhos</div>
+                    <button class="btn-colar-tudo" onclick="colarTodasAsFigurinhasDoInventario()">Colar Tudo ⚡</button>
+                </div>
                 <div id="pack-opening" class="pack-opening"></div>
             </div>
         </div>
 
         <!-- SEÇÃO ABA 2: ÁLBUM -->
         <div id="secao-album" class="secao-aba">
+            <div id="progresso-total" class="progresso-album-container">Carregando photocards colados...</div>
+            
             <div class="album-wrapper">
                 <div class="album-grid" id="album-grid"></div>
             </div>
@@ -659,14 +806,27 @@
         </div>
     </div>
 
-    <script {nonce}>
+    <script>
         const TOTAL_FIGURINHAS = 150;
         const FIGURINHAS_POR_PAGINA = 9; 
         let paginaAtual = 1;
         let database = [];
         const extensoesSuportadas = ['.avif', '.webp', '.jpg', '.jpeg', '.png'];
 
-        let totalRepetidasGerais = 0;
+        let bloqueioAtivo = false;
+
+        // INJETOR DE NOTIFICAÇÃO TOAST COM DESIGN DO GAME (IMERSÃO TOTAL)
+        function dispararNotificacaoApp(texto, tipoPremium = false) {
+            const toast = document.createElement('div');
+            if (tipoPremium) {
+                toast.className = 'toast-premium-app';
+            } else {
+                toast.className = 'toast-fragmento';
+            }
+            toast.innerHTML = texto;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), tipoPremium ? 4000 : 2000);
+        }
 
         function descobrirEfitarImagem(imgElement, idDoCard, estiloBackgroundElement = null) {
             let indiceExtensao = 0;
@@ -699,7 +859,7 @@
             }
         }
 
-        let progresso = JSON.parse(localStorage.getItem('bts_album_fragments_v9')) || {
+        let progresso = JSON.parse(localStorage.getItem('bts_album_fragments_v11')) || {
             coladas: [],
             inventario: [],
             fragmentos: 0,
@@ -713,9 +873,11 @@
             if (nomeAba === 'banca') {
                 document.getElementById('secao-banca').classList.add('active');
                 document.getElementById('tab-banca').classList.add('active');
+                document.getElementById('carteira-loja').style.display = 'inline-flex';
             } else {
                 document.getElementById('secao-album').classList.add('active');
                 document.getElementById('tab-album').classList.add('active');
+                document.getElementById('carteira-loja').style.display = 'none';
                 renderizarPagina(); 
             }
         }
@@ -724,19 +886,57 @@
             const agora = new Date().getTime();
             const diarioDisponivel = (agora >= progresso.proximoPacote);
 
-            document.getElementById('info-repetidas').innerText = `Fragmentos Obtidos: ${progresso.fragmentos} / 3`;
+            document.getElementById('carteira-loja').innerText = `💎 ${progresso.fragmentos} ${progresso.fragmentos === 1 ? 'Fragmento' : 'Fragmentos'}`;
             
             if (diarioDisponivel) {
                 document.getElementById('btn-reciclar').disabled = true;
-                document.getElementById('btn-reciclar').title = "Abra seu pacote diário primeiro!";
+                document.getElementById('btn-reciclar').innerText = "Abra o diário primeiro";
             } else {
-                document.getElementById('btn-reciclar').disabled = progresso.fragmentos < 3;
-                document.getElementById('btn-reciclar').removeAttribute('title');
+                document.getElementById('btn-reciclar').disabled = progresso.fragmentos < 3 || bloqueioAtivo;
+                document.getElementById('btn-reciclar').innerText = "Consumir 3 💎";
+            }
+
+            const btnSecreto = document.getElementById('btn-comprar-secreto');
+            if (progresso.fragmentos >= 5 && progresso.coladas.length < TOTAL_FIGURINHAS && !bloqueioAtivo) {
+                btnSecreto.disabled = false;
+            } else {
+                btnSecreto.disabled = true;
             }
         }
 
+        function comprarCardSecretoFaltante() {
+            if (progresso.fragmentos < 5 || bloqueioAtivo) return;
+
+            let listaFaltantes = [];
+            for (let i = 1; i <= TOTAL_FIGURINHAS; i++) {
+                if (!progresso.coladas.includes(i) && !progresso.inventario.includes(i)) {
+                    listaFaltantes.push(i);
+                }
+            }
+
+            if (listaFaltantes.length === 0) {
+                dispararNotificacaoApp("⚠️ Você já possui todos os cards restantes na esteira!");
+                return;
+            }
+
+            let cardSorteadoId = listaFaltantes[Math.floor(Math.random() * listaFaltantes.length)];
+
+            progresso.fragmentos -= 5;
+            progresso.inventario.push(cardSorteadoId);
+
+            salvarDados();
+            renderizarInventario();
+
+            // SUBSTITUÍDO: Mensagem de alerta padrão vira notificação Toast limpa
+            dispararNotificacaoApp(`🔮 Card Secreto Revelado!<br>O Photocard #${cardSorteadoId} foi enviado para colagem.`);
+
+            setTimeout(() => {
+                document.getElementById('bloco-inventario-separado').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
         function salvarDados() {
-            localStorage.setItem('bts_album_fragments_v9', JSON.stringify(progresso));
+            localStorage.setItem('bts_album_fragments_v11', JSON.stringify(progresso));
             document.getElementById('progresso-total').innerText = `Photocards Colados: ${progresso.coladas.length} / ${TOTAL_FIGURINHAS} 💜`;
             atualizarPainelFragmentos();
         }
@@ -794,7 +994,6 @@
             executarAberturaModalComGarantia(id);
         }
 
-        // NOVA FUNÇÃO EXCLUSIVA PARA A LOJINHA QUE PULA A TRAVA DE SEGURANÇA
         function expandirFigurinhaLojinha(id) {
             executarAberturaModalComGarantia(id);
         }
@@ -823,7 +1022,9 @@
 
         function engatilharAbertura() {
             const agora = new Date().getTime();
-            if (agora < progresso.proximoPacote) return;
+            if (agora < progresso.proximoPacote || bloqueioAtivo) return;
+
+            bloqueioAtivo = true; 
 
             const pack = document.getElementById('pack-virtual');
             const btn = document.getElementById('btn-abrir');
@@ -843,11 +1044,8 @@
         }
 
         function criarToastFragmento() {
-            const toast = document.createElement('div');
-            toast.className = 'toast-fragmento';
-            toast.innerText = "✨ +1 Fragmento de Card Repetido!";
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 2000);
+            // Usa o sistema nativo de feedback visual
+            dispararNotificacaoApp("✨ +1 Fragmento por Card Repetido!");
         }
 
         function abrirPacoteLogica() {
@@ -872,21 +1070,30 @@
             if (teveRepetida) criarToastFragmento();
 
             progresso.proximoPacote = agora + (24 * 60 * 60 * 1000); 
+            bloqueioAtivo = false; 
             salvarDados();
             renderizarInventario();
+
+            setTimeout(() => {
+                const blocoInventario = document.getElementById('bloco-inventario-separado');
+                if (blocoInventario) {
+                    blocoInventario.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 150);
         }
 
         function renderizarInventario() {
             const container = document.getElementById('pack-opening');
+            const blocoInventario = document.getElementById('bloco-inventario-separado');
             
             if (progresso.inventario.length === 0) {
-                container.classList.remove('active'); 
+                blocoInventario.classList.remove('active'); 
                 container.innerHTML = '';
                 return;
             }
 
             container.innerHTML = '';
-            container.classList.add('active'); 
+            blocoInventario.classList.add('active'); 
 
             progresso.inventario.forEach((id, index) => {
                 const fig = database.find(f => f.id === id);
@@ -916,7 +1123,7 @@
 
                     pressTimer = setTimeout(() => {
                         if (!isScrolling) {
-                            expandirFigurinhaLojinha(id); // CORRIGIDO: Agora aponta para a função sem travas!
+                            expandirFigurinhaLojinha(id); 
                             pressTimer = null;
                         }
                     }, 500);
@@ -924,10 +1131,12 @@
 
                 const moverToque = (e) => {
                     const touch = e.touches ? e.touches[0] : e;
-                    if (Math.abs(touch.clientX - startX) > 10 || Math.abs(touch.clientY - startY) > 10) {
+                    if (Math.abs(touch.clientX - startX) > 8 || Math.abs(touch.clientY - startY) > 8) {
                         isScrolling = true;
-                        clearTimeout(pressTimer);
-                        pressTimer = null;
+                        if (pressTimer) {
+                            clearTimeout(pressTimer);
+                            pressTimer = null;
+                        }
                     }
                 };
 
@@ -943,7 +1152,7 @@
 
                 item.onmousedown = iniciarToque;
                 item.onmouseup = finalizarToque;
-                item.onmouseleave = () => { clearTimeout(pressTimer); pressTimer = null; };
+                item.onmouseleave = () => { if(pressTimer) { clearTimeout(pressTimer); pressTimer = null; } };
 
                 item.addEventListener('touchstart', iniciarToque, { passive: true });
                 item.addEventListener('touchmove', moverToque, { passive: true });
@@ -954,6 +1163,46 @@
                 const elInv = document.getElementById(`inv-item-${id}`);
                 descobrirEfitarImagem(null, id, elInv);
             });
+        }
+
+        function colarTodasAsFigurinhasDoInventario() {
+            if (progresso.inventario.length === 0) return;
+
+            const listaParaColar = [...progresso.inventario];
+
+            listaParaColar.forEach(id => {
+                if (!progresso.coladas.includes(id)) progresso.coladas.push(id);
+                
+                const vagaAlbum = document.getElementById(`vaga-album-${id}`);
+                if (vagaAlbum) {
+                    vagaAlbum.classList.add('colada');
+                    
+                    const figInfo = database.find(f => f.id === id);
+                    vagaAlbum.innerHTML = `
+                        <span class="badge-raridade" style="background-color: var(--${figInfo.raridade}); color: ${figInfo.raridade === 'comum' ? '#222' : '#fff'}">${figInfo.raridade}</span>
+                        <div class="slot-foto">
+                            <div class="badge-numero">#${id}</div>
+                            <span>#${id}</span>
+                            <img class="img-figurinha just-pasted" id="img-card-${id}" alt="Card ${id}">
+                        </div>
+                    `;
+                    const imgElement = document.getElementById(`img-card-${id}`);
+                    descobrirEfitarImagem(imgElement, id);
+                }
+            });
+
+            progresso.inventario = [];
+            
+            salvarDados();
+            document.getElementById('bloco-inventario-separado').classList.remove('active');
+            document.getElementById('pack-opening').innerHTML = '';
+
+            // SUBSTITUÍDO: Alerta vira notificação Toast na parte inferior da tela
+            if (progresso.coladas.length === TOTAL_FIGURINHAS) {
+                dispararNotificacaoApp("🎉 <b>APOBANGPO!</b> 👑<br>Você completou o álbum definitivo do BTS! 💜", true);
+            } else {
+                dispararNotificacaoApp("⚡ Photocards colados automaticamente no Álbum!");
+            }
         }
 
         function colarFigurinha(id) {
@@ -971,7 +1220,7 @@
                 cardElement.remove(); 
 
                 if (progresso.inventario.length === 0) {
-                    document.getElementById('pack-opening').classList.remove('active');
+                    document.getElementById('bloco-inventario-separado').classList.remove('active');
                 }
 
                 const vagaAlbum = document.getElementById(`vaga-album-${id}`);
@@ -992,14 +1241,15 @@
                     descobrirEfitarImagem(imgElement, id);
                 }
 
+                // SUBSTITUÍDO: Alerta final vira um Pop-up Premium persistente na tela
                 if (progresso.coladas.length === TOTAL_FIGURINHAS) {
-                    alert("🎉 Apoooobangpo! 👑 Você completou o álbum definitivo do BTS! 💜");
+                    dispararNotificacaoApp("🎉 <b>APOBANGPO!</b> 👑<br>Você completou o álbum definitivo do BTS! 💜", true);
                 }
             }, 220);
         }
 
         function executarForja() {
-            if (progresso.fragmentos < 3) return;
+            if (progresso.fragmentos < 3 || bloqueioAtivo) return;
 
             progresso.fragmentos -= 3;
             progresso.proximoPacote = 0; 
@@ -1023,7 +1273,7 @@
                 area.classList.add('hidden'); 
                 btn.disabled = true;
             }
-            atualizarPainelFragmentos();
+            salvarDados(); 
         }
 
         function iniciarTimer() {
