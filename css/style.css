@@ -1,0 +1,793 @@
+:root {
+            --primary: #7209b7;
+            --secondary: #b5179e;
+            --army-purple: #3f37c9;
+            --bg: #1a1a2e;
+            --card-dark: #24243e;
+            --text-light: #f7f7f9;
+            
+            /* Cores de Raridade K-Pop */
+            --comum: #a8dadc;
+            --incomum: #4cc9f0;
+            --raro: #f72585;
+            --lendario: #ffbe0b;
+
+            /* Fundos dos Cards */
+            --bg-comum: rgba(168, 218, 220, 0.1);
+            --bg-incomum: rgba(76, 201, 240, 0.15);
+            --bg-raro: rgba(247, 37, 133, 0.2);
+            --bg-lendario: rgba(255, 190, 11, 0.25);
+        }
+
+        /* BLINDAGEM COMPLETA ESTILO APP - ACABA COM SELEÇÕES ACIDENTAIS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            background: linear-gradient(180deg, #0f0c20 0%, #1a1a2e 100%);
+            color: var(--text-light);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* CAPA */
+        #capa-album {
+            background: linear-gradient(135deg, #4d1234 0%, var(--primary) 50%, #1e0034 100%);
+            width: 100%;
+            max-width: 500px;
+            height: 85vh;
+            max-height: 650px;
+            border-radius: 24px;
+            box-shadow: 0 20px 45px rgba(114, 9, 183, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            cursor: pointer;
+            border: 4px solid var(--secondary);
+            margin-top: 3vh;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        .bts-logo {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        .logo-door {
+            width: 35px;
+            height: 90px;
+            background: white;
+            transform: skewY(15deg);
+        }
+        .logo-door.right {
+            transform: skewY(-15deg);
+        }
+
+        #capa-album h1 {
+            font-size: 2.4rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.4);
+        }
+
+        #capa-album p {
+            font-size: 1.1rem;
+            color: #ffb7ff;
+            margin-bottom: 30px;
+        }
+
+        .btn-entrar {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 0 20px rgba(181, 23, 158, 0.6);
+            cursor: pointer;
+        }
+
+        /* CONTEÚDO PRINCIPAL */
+        #conteudo-principal {
+            display: none;
+            width: 100%;
+            max-width: 1240px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .carteira-fragmentos {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #00f5d4;
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.15);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .progresso-album-container {
+            color: #b5179e;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* ABAS */
+        .abas-navegacao {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .aba-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            color: #aaa;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .aba-btn.active {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(181, 23, 158, 0.4);
+        }
+
+        .secao-aba {
+            display: none;
+            width: 100%;
+            animation: fadeInTab 0.3s ease forwards;
+        }
+
+        .secao-aba.active {
+            display: block;
+        }
+
+        @keyframes fadeInTab {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* BANCA / LOJINHA */
+        .banca {
+            background: var(--card-dark);
+            padding: 25px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .booster-area {
+            position: relative;
+            width: 160px;
+            height: 220px;
+            margin: 25px auto 0 auto;
+            perspective: 1200px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: height, opacity, margin;
+        }
+
+        .booster-area.hidden {
+            height: 0px;
+            margin: 0 auto;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .booster-pack {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #b5179e, #7209b7, #3f37c9);
+            border: 3px solid #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            z-index: 10;
+            will-change: transform, opacity, filter;
+            transition: transform 0.2s ease;
+        }
+
+        .booster-pack .pack-logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.4);
+        }
+
+        .booster-pack.shake { animation: shakePack 0.4s linear infinite; }
+        .booster-pack.burst { animation: burstPack 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+
+        @keyframes shakePack {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(-2px, 1px) rotate(-1deg); }
+            40% { transform: translate(2px, -1px) rotate(1.5deg); }
+            60% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+            80% { transform: translate(2px, 1px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        @keyframes burstPack {
+            0% { transform: scale(1); opacity: 1; filter: brightness(1); }
+            30% { transform: scale(1.15); opacity: 1; filter: brightness(1.8); }
+            100% { transform: scale(0.1) rotate(45deg); opacity: 0; filter: brightness(3); }
+        }
+
+        .btn-pacote {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(114, 9, 183, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .btn-pacote:disabled {
+            background: #333344 !important;
+            color: #666677 !important;
+            box-shadow: none !important;
+            cursor: not-allowed !important;
+            border: 1px solid #444455;
+        }
+
+        .container-loja-atividades {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        /* ROLETA DA SORTE */
+        .roleta-container {
+            flex: 1;
+            min-width: 240px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            border: 1px dashed rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .roleta-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin-bottom: 10px;
+        }
+
+        .roleta-ponteiro {
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 14px solid #ff007f;
+            z-index: 15;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+        }
+
+        .roleta-disco {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            background: conic-gradient(
+                var(--primary) 0deg 90deg, 
+                var(--secondary) 90deg 180deg, 
+                var(--army-purple) 180deg 270deg, 
+                #1a1a2e 270deg 360deg
+            );
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            transition: transform 3.5s cubic-bezier(0.25, 1, 0.2, 1);
+            will-change: transform;
+        }
+
+        .roleta-centro {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px; height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .btn-roleta {
+            background: linear-gradient(90deg, #00f5d4, #00bbf9);
+            color: #000;
+            border: none;
+            padding: 8px 18px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.3);
+            transition: transform 0.2s ease;
+        }
+        .btn-roleta:disabled { background: #444; color: #777; box-shadow: none; cursor: not-allowed; }
+
+        /* RASPADINHA PREMIADA GIGANTE */
+        .raspador-box {
+            flex: 1;
+            min-width: 240px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            border: 1px dashed rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .raspadinha-widget {
+            position: relative;
+            width: 200px;
+            height: 266px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            margin-bottom: 10px;
+            background: #151526;
+            border: 3px solid rgba(255,255,255,0.1);
+        }
+
+        .raspadinha-foto-revelada {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: none;
+        }
+
+        .raspadinha-canvas-tinta {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            cursor: crosshair;
+            z-index: 5;
+            touch-action: none; 
+        }
+
+        .raspadinha-placeholder-status {
+            width: 200px;
+            height: 266px;
+            background: linear-gradient(135deg, #2b1055, #511281);
+            border: 3px dashed var(--lendario);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.2);
+            margin-bottom: 10px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-comprar-raspadinha {
+            background: linear-gradient(90deg, #ff9e00, #ff6000);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 158, 0, 0.3);
+            transition: transform 0.2s ease;
+            font-size: 0.85rem;
+        }
+        .btn-comprar-raspadinha:disabled { background: #444; color: #777; box-shadow: none; cursor: not-allowed; }
+
+        .timer {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #ffb7ff;
+            font-weight: bold;
+        }
+
+        /* INVENTÁRIO */
+        .secao-inventario-separador {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            margin: 25px auto 0 auto;
+            text-align: center;
+            scroll-margin-top: 20px;
+        }
+        .secao-inventario-separador.active {
+            display: block;
+        }
+        .linha-divisoria-neon {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            width: 100%;
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+        
+        .header-inventario-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 580px;
+            margin: 0 auto 15px auto;
+            padding: 0 10px;
+        }
+
+        .titulo-inventario {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffb7ff;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-colar-tudo {
+            background: linear-gradient(135deg, #00f5d4, #00bbf9);
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 245, 212, 0.3);
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform;
+        }
+        .btn-colar-tudo:hover { transform: scale(1.05); }
+
+        .pack-opening {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        .sticker-item {
+            width: 85px;
+            height: 113px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            position: relative;
+            transform: scale(0);
+            will-change: transform, opacity;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+            user-select: none;
+            -webkit-user-drag: none;
+            touch-action: pan-y; 
+        }
+
+        .sticker-item.clicked-out {
+            animation: stampOutEffect 0.35s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards !important;
+        }
+
+        @keyframes stampOutEffect {
+            0% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+            40% { transform: scale(1.15) rotate(5deg); filter: brightness(1.6); box-shadow: 0 15px 30px rgba(0,0,0,0.6); }
+            100% { transform: scale(0) rotate(-15deg); opacity: 0; filter: brightness(2); }
+        }
+
+        .badge-numero {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .spawn-comum { animation: spawnBasic 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        @keyframes spawnBasic { to { transform: scale(1) rotate(-1.5deg); } }
+
+        .spawn-rara {
+            border: 3px solid var(--raro) !important;
+            animation: spawnRaraAnim 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, pulseRaro 1.5s infinite alternate;
+        }
+        @keyframes spawnRaraAnim { to { transform: scale(1.04) rotate(1.5deg); } }
+        @keyframes pulseRaro { 0% { box-shadow: 0 5px 15px rgba(0,0,0,0.5); } 100% { box-shadow: 0 0 15px var(--raro); } }
+
+        .spawn-lendaria {
+            border: 3px solid var(--lendario) !important;
+            animation: spawnLendariaAnim 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, pulseLendario 1s infinite alternate;
+        }
+        @keyframes spawnLendariaAnim { 0% { transform: scale(0) rotateY(180deg); filter: brightness(2); } 100% { transform: scale(1.08) rotateY(0deg); filter: brightness(1); } }
+        @keyframes pulseLendario { 0% { box-shadow: 0 5px 15px rgba(0,0,0,0.6); } 100% { box-shadow: 0 0 25px var(--lendario), 0 0 5px #fff; } }
+
+        /* GRID DO ÁLBUM (3X3 BLOCO) */
+        .album-wrapper {
+            width: 100%;
+            background: var(--card-dark);
+            padding: 20px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: center;
+        }
+
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 460px;
+        }
+
+        .vaga-figurinha {
+            padding: 6px;
+            border-radius: 12px;
+            border: 2px dashed #444;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .vaga-figurinha.colada { border-style: solid; }
+        .vaga-figurinha.colada:hover { transform: scale(1.04); }
+
+        .slot-foto {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            background-color: #151526;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #444;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-figurinha {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            will-change: opacity, transform;
+        }
+
+        .img-figurinha.fade-smooth {
+            display: block;
+            opacity: 0;
+            animation: fadeInPageCard 0.25s ease-out forwards;
+        }
+
+        .img-figurinha.just-pasted {
+            display: block;
+            animation: popInNewCard 0.4s cubic-bezier(0.175, 0.885, 0.42, 1.2) forwards;
+        }
+
+        @keyframes fadeInPageCard { to { opacity: 1; } }
+
+        @keyframes popInNewCard {
+            0% { transform: scale(1.4) rotate(8deg); opacity: 0; filter: brightness(2) blur(2px); }
+            70% { transform: scale(0.95) rotate(-2deg); opacity: 1; filter: brightness(1); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; filter: brightness(1); }
+        }
+
+        .vaga-figurinha.colada .slot-foto span { display: none; }
+
+        .vaga-figurinha.raridade-comum { background-color: var(--bg-comum); border-color: rgba(168, 218, 220, 0.3); }
+        .vaga-figurinha.raridade-incomum { background-color: var(--bg-incomum); border-color: rgba(76, 201, 240, 0.4); }
+        .vaga-figurinha.raridade-raro { background-color: var(--bg-raro); border-color: rgba(247, 37, 133, 0.5); }
+        .vaga-figurinha.raridade-lendario { background-color: var(--bg-lendario); border-color: rgba(255, 190, 11, 0.6); }
+
+        .badge-raridade {
+            font-size: 0.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: #000;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+        .vaga-figurinha.colada .badge-raridade { color: #fff; }
+
+        /* CONTROLES DE PÁGINA */
+        .controles-paginas {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        .btn-pag {
+            background: linear-gradient(90deg, var(--primary), var(--army-purple));
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .btn-pag:disabled { background: #333344; color: #666677; cursor: not-allowed; }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-conteudo {
+            background: #1e1e38;
+            padding: 25px;
+            border-radius: 24px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            border: 2px solid var(--secondary);
+        }
+
+        .modal-wrapper-foto {
+            position: relative;
+            width: 100%;
+            display: inline-block;
+        }
+
+        .modal-foto {
+            width: 100%;
+            border-radius: 14px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+            border: 3px solid #fff;
+            display: block;
+        }
+
+        .btn-fechar-modal {
+            position: absolute;
+            top: -15px; right: -15px;
+            background: var(--raro);
+            color: white;
+            border: none;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        .dev-btn {
+            margin: 25px 0;
+            background: none;
+            border: 1px solid #444;
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: #666;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        /* INJETORES DE NOTIFICAÇÃO TOAST */
+        .toast-fragmento {
+            position: fixed;
+            bottom: 30px;
+            background: linear-gradient(90deg, #00f5d4, #3f37c9);
+            color: #000;
+            font-weight: bold;
+            padding: 12px 25px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0, 245, 212, 0.4);
+            z-index: 2000;
+            animation: slideUpToast 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .toast-premium-app {
+            position: fixed;
+            top: 25%;
+            background: linear-gradient(135deg, #1e0034, var(--primary));
+            color: #fff;
+            font-weight: bold;
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 10px 40px rgba(114, 9, 183, 0.6);
+            text-align: center;
+            z-index: 3000;
+            max-width: 320px;
+            width: 90%;
+            animation: popInToastApp 4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes slideUpToast {
+            0% { transform: translateY(60px); opacity: 0; }
+            15% { transform: translateY(0); opacity: 1; }
+            85% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-40px); opacity: 0; }
+        }
+
+        @keyframes popInToastApp {
+            0% { transform: scale(0.6); opacity: 0; }
+            10% { transform: scale(1); opacity: 1; }
+            90% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.4) translateY(-100px); opacity: 0; }
+        }
