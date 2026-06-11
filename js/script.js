@@ -627,6 +627,11 @@ renderizarInventario();
 iniciarTimer();
 
 //Funções ADM:
+function pularTempo() {
+    progresso.proximoPacote = 0;
+    localStorage.setItem('bts_album_fragments_v11', JSON.stringify(progresso));
+    atualizarVisualBooster();
+}
 
 function completar100() {
     progresso.coladas = Array.from({ length: 150 }, (_, i) => i + 1);
@@ -647,5 +652,3 @@ function abrirFigurinhas(quantidade) {
     renderizarInventario();
     document.getElementById('bloco-inventario-separado').scrollIntoView({ behavior: 'smooth' });
 }
-
-
