@@ -627,10 +627,18 @@ renderizarInventario();
 iniciarTimer();
 
 //Funções ADM:
+
 function pularTempo() {
     progresso.proximoPacote = 0;
     localStorage.setItem('bts_album_fragments_v11', JSON.stringify(progresso));
     atualizarVisualBooster();
+}
+
+function adicionarFragmentos(quantidade) {
+    progresso.fragmentos += quantidade;
+    localStorage.setItem('bts_album_fragments_v11', JSON.stringify(progresso));
+    atualizarPainelFragmentos();
+    dispararNotificacaoApp("💎 +100 Fragmentos adicionados via Console!");
 }
 
 function completar100() {
@@ -652,3 +660,5 @@ function abrirFigurinhas(quantidade) {
     renderizarInventario();
     document.getElementById('bloco-inventario-separado').scrollIntoView({ behavior: 'smooth' });
 }
+
+
