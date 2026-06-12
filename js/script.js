@@ -649,7 +649,7 @@ function completar100() {
 
 }
 
-function zerrarAlbum() {
+function zerarAlbum() {
     localStorage.removeItem('bts_album_fragments_v11');
     location.reload();
 }
